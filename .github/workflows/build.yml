@@ -15,6 +15,6 @@ jobs:
 
       - name: Start building
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           bash build.sh c

@@ -101,14 +101,14 @@ create_release() {
     url=https://api.github.com/repos/TianWalkzzMiku/ICEPLUS-KERNEL-WHYRED/releases
     upload_url=$(curl -s \
         -H "Accept: application/vnd.github+json" \
-        -H "Authorization: token ${GITHUB_TOKEN}" \
+        -H "Authorization: token ${GH_TOKEN}" \
         $url \
         -d "$(generate_release_data)" | jq -r .upload_url | cut -d { -f'1')
 }
 
 upload_release_file() {
     command="curl -s -o /dev/null -w '%{http_code}' \
-        -H 'Authorization: token ${GITHUB_TOKEN}' \
+        -H 'Authorization: token ${GH_TOKEN}' \
         -H 'Content-Type: $(file -b --mime-type ${1})' \
         --data-binary @${1} \
         ${upload_url}?name=$(basename ${1})"

@@ -6,9 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-    env:
-      TG_TOKEN: ${{ secrets.TG_TOKEN }}
-      TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -19,4 +17,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          bash build.sh cr
+          bash build.sh c

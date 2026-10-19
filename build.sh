@@ -8,8 +8,8 @@ nocol='\033[0m'
 
 setup_env() {
     export KERNEL_DIR=${PWD}
-    export KBUILD_BUILD_USER="Shekhawat2"
-    export KBUILD_BUILD_HOST="Builder"
+    export KBUILD_BUILD_USER="Yaan"
+    export KBUILD_BUILD_HOST="Server"
     export ARCH=arm64
     export CLANG_DIR=${KERNEL_DIR}/../clang-builds
     export OUT_DIR=${KERNEL_DIR}/out
@@ -17,7 +17,7 @@ setup_env() {
     export JOBS="$(nproc --all)"
     export BSDIFF=${KERNEL_DIR}/bin/bsdiff
     export BUILD_TIME=$(date +"%Y%m%d-%H%M%S")
-    export KERNELZIP=KCUFKernel-whyred-4.19-KSU-${BUILD_TIME}.zip
+    export KERNELZIP=IceKernel-whyred-4.19-KSU-${BUILD_TIME}.zip
     export BUILTIMAGE=${OUT_DIR}/arch/arm64/boot/Image
     export BUILTDTB=${OUT_DIR}/arch/arm64/boot/dts/vendor/qcom/whyred.dtb
     export BUILTFSTABDTB=${OUT_DIR}/arch/arm64/boot/dts/vendor/qcom/whyred_fstab.dtb
@@ -25,11 +25,11 @@ setup_env() {
 
     if [ ! -d $CLANG_DIR ]; then
         echo "clang directory does not exists, cloning now..."
-        git clone https://gitlab.com/shekhawat2/clang-builds.git -b master ${CLANG_DIR} --depth 1
+        git clone https://github.com/TianWalkzzMiku/SuperRyzen-Clang.git -b main ${CLANG_DIR} --depth 1
     fi
     if [ ! -d $ANYKERNEL_DIR ]; then
         echo "anykernel directory does not exists, cloning now..."
-        git clone https://github.com/shekhawat2/AnyKernel3.git -b whyred_419 ${ANYKERNEL_DIR}
+        git clone https://github.com/TianWalkzzMiku/AnyKernel3.git -b whyred_419 ${ANYKERNEL_DIR}
     fi
 
     export PATH=${CLANG_DIR}/bin:${KERNEL_DIR}/bin:${PATH}
@@ -87,8 +87,8 @@ generate_release_data() {
     cat <<EOF
 {
 "tag_name":"${BUILD_TIME}",
-"target_commitish":"KCUF_419",
-"name":"KCUFKernel-whyred-4.19-${BUILD_TIME}",
+"target_commitish":"ICE_419",
+"name":"IceKernel-whyred-4.19-${BUILD_TIME}",
 "body":"${KERNELZIP}",
 "draft":false,
 "prerelease":false,
@@ -98,7 +98,7 @@ EOF
 }
 
 create_release() {
-    url=https://api.github.com/repos/shekhawat2/android_kernel_xiaomi_whyred/releases
+    url=https://api.github.com/repos/TianWalkzzMiku/ICEPLUS-KERNEL-WHYRED/releases
     upload_url=$(curl -s \
         -H "Accept: application/vnd.github+json" \
         -H "Authorization: token ${GITHUB_TOKEN}" \
